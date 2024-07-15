@@ -137,6 +137,13 @@
                 margin: 5px 0;
             }
         }
+
+
+        #bouncing-image {
+            position: fixed;
+            width: 200px; /* Adjust size as needed */
+            height: 200px; /* Adjust size as needed */
+        }
     </style>
 </head>
 <body onload="showPopup()">
@@ -166,7 +173,7 @@
 
 
     
-
+    <img id="bouncing-image" src="images/dvd.png" alt="Bouncing Image">
 
     <div id="overlay">
         <div id="popup">
@@ -184,6 +191,37 @@
         function hidePopup() {
             document.getElementById('overlay').style.display = 'none';
         }
+
+
+
+
+        const img = document.getElementById('bouncing-image');
+        let x = 0;
+        let y = 0;
+        let xSpeed = 5;
+        let ySpeed = 5;
+
+        function animate() {
+            const maxX = window.innerWidth - img.width;
+            const maxY = window.innerHeight - img.height;
+
+            x += xSpeed;
+            y += ySpeed;
+
+            if (x <= 0 || x >= maxX) {
+                xSpeed = -xSpeed;
+            }
+            if (y <= 0 || y >= maxY) {
+                ySpeed = -ySpeed;
+            }
+
+            img.style.left = x + 'px';
+            img.style.top = y + 'px';
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
     </script>
 </body>
 </html>
